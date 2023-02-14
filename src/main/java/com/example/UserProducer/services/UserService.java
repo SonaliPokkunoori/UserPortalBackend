@@ -68,10 +68,31 @@ public class UserService {
             if(user1.getPassword().equals(loginDTO.getPassword())){
                 statusDTO.setIsvalid(true);
                 statusDTO.setUserId(user1.userId);
+                user1.setIsvalid(true);
+                userRepository.save(user1);
                 return statusDTO;
             }
+            else {
+                user1.setIsvalid(false);
+                statusDTO.setIsvalid(false);
+            }
+            userRepository.save(user1);
         }
-        statusDTO.setIsvalid(false);
+//        statusDTO.setIsvalid(false);
         return statusDTO;
+    }
+
+    public Boolean logoutStatus(String userId){
+        Optional<User> user = userRepository.findById(userId);
+        User user1=new User();
+        if(user.isPresent()){
+            user1= user.get();
+        }
+        if(user1.getIsvalid() == true){
+            user1.setIsvalid(false);
+            userRepository.save(user1);
+            return true;
+        }
+        return false;
     }
 }

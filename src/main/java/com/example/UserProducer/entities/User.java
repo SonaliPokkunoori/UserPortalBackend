@@ -16,5 +16,6 @@ public class User {
     public String phno;
     public String maritalStatus;
     public Date dob;
+    public Boolean isvalid;
 
 }

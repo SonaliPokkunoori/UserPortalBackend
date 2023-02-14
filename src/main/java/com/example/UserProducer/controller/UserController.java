@@ -48,4 +48,10 @@ public class UserController {
         StatusDTO loginStatus=userService.loginStatus(loginDTO);
         return new ResponseEntity<>(loginStatus,HttpStatus.OK);
     }
+
+    @PostMapping("/getLogoutStatus/{userId}")
+    public ResponseEntity<Boolean> logoutStatus(@PathVariable("userId") String userId){
+        Boolean logoutStatus = userService.logoutStatus(userId);
+        return new ResponseEntity<>(logoutStatus,HttpStatus.OK);
+    }
 }
