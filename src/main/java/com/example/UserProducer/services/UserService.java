@@ -30,6 +30,12 @@ public class UserService {
 
         User user=new User();
         BeanUtils.copyProperties(userDTO,user);
+        User user1 = getUserDetailsByName(user.getUserName());
+        boolean checkUserName = userRepository.existsByUserName(user.getUserName());
+        if(checkUserName){
+            System.out.println("Username already exists!");
+            return null;
+        }
         userRepository.save(user);
         System.out.println("Data sent to Mongo");
         return user;
@@ -78,19 +84,28 @@ public class UserService {
             }
             userRepository.save(user1);
         }
+        else{
+            System.out.println("Nouser");
+            return null;
+        }
 //        statusDTO.setIsvalid(false);
         return statusDTO;
     }
 
     public Boolean logoutStatus(String userId){
-        Optional<User> user = userRepository.findById(userId);
-        User user1=new User();
-        if(user.isPresent()){
-            user1= user.get();
+        Optional<User> userOptional=userRepository.findById(userId);
+        User user=new User();
+        if(userOptional.isPresent()){
+            user=userOptional.get();
         }
-        if(user1.getIsvalid() == true){
-            user1.setIsvalid(false);
-            userRepository.save(user1);
+        else {
+            System.out.println("No user");
+            return null;
+        }
+        System.out.println(user);
+        if(user.getIsvalid() == true){
+            user.setIsvalid(false);
+            userRepository.save(user);
             return true;
         }
         return false;
