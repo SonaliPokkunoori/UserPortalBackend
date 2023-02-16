@@ -85,7 +85,7 @@ public class UserService {
             userRepository.save(user1);
         }
         else{
-            System.out.println("Nouser");
+            System.out.println("No User");
             return null;
         }
 //        statusDTO.setIsvalid(false);
