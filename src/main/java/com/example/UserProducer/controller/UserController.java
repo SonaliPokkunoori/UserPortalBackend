@@ -54,4 +54,10 @@ public class UserController {
         Boolean logoutStatus = userService.logoutStatus(userId);
         return new ResponseEntity<>(logoutStatus,HttpStatus.OK);
     }
+
+    @PostMapping("/editProfile")
+    public ResponseEntity<User> editProfile(@RequestBody User user){
+        User user1 = userService.editProfile(user);
+        return new ResponseEntity<>(user1,HttpStatus.OK);
+    }
 }

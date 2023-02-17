@@ -2,6 +2,7 @@ package com.example.UserProducer.services;
 
 import com.example.UserProducer.dto.LoginDTO;
 import com.example.UserProducer.dto.StatusDTO;
+import com.example.UserProducer.dto.UserDTO;
 import com.example.UserProducer.entities.User;
 import com.example.UserProducer.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -41,7 +42,7 @@ public class UserService {
         return user;
     }
 
-    @Cacheable(value = "userCache")
+//    @Cacheable(value = "userCache")
     public User getUserDetails(String userId){
         Optional<User> user=userRepository.findById(userId);
         User user1=new User();
@@ -109,5 +110,29 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    @CacheEvict(value = "userCache")
+    public User editProfile(User user){
+        Optional<User> user1 = userRepository.findById(user.getUserId());
+        User user2 = new User();
+        if(user1.isPresent()){
+            user2 = user1.get();
+        }
+        else{
+            System.out.println("No user");
+            return null;
+        }
+//        user2.setUserId(user.getUserId());
+//        user2.setUserName(user.getUserName());
+//        user2.setPassword(user.getPassword());
+//        user2.setPhno(user2.getPhno());
+//        user2.setMaritalStatus(user2.getMaritalStatus());
+//        user2.setEmail(user.getEmail());
+//        user2.setDob(user.getDob());
+        BeanUtils.copyProperties(user,user2);
+        userRepository.save(user2);
+        System.out.println("Data Updated!!");
+        return user2;
     }
 }
