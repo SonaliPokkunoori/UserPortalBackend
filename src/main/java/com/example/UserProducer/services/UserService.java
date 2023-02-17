@@ -42,7 +42,7 @@ public class UserService {
         return user;
     }
 
-//    @Cacheable(value = "userCache")
+    @Cacheable(value = "userCache")
     public User getUserDetails(String userId){
         Optional<User> user=userRepository.findById(userId);
         User user1=new User();
