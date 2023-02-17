@@ -61,7 +61,6 @@ public class UserController {
         return new ResponseEntity<>(user1,HttpStatus.OK);
     }
 
-
     @PostMapping("/forgotPassword/{userId}/{password}")
     public ResponseEntity<User> forgotPassword(@PathVariable("userId") String userId,@PathVariable("password") String password){
         User user = userService.forgotPassword(userId,password);
