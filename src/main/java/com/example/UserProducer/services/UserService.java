@@ -35,7 +35,7 @@ public class UserService {
         boolean checkUserName = userRepository.existsByUserName(user.getUserName());
         if(checkUserName){
             System.out.println("Username already exists!");
-            return null;
+            return new User();
         }
         userRepository.save(user);
         System.out.println("Data sent to Mongo");
@@ -87,7 +87,7 @@ public class UserService {
         }
         else{
             System.out.println("No User");
-            return null;
+            return new StatusDTO();
         }
 //        statusDTO.setIsvalid(false);
         return statusDTO;
@@ -99,10 +99,10 @@ public class UserService {
         if(userOptional.isPresent()){
             user=userOptional.get();
         }
-        else {
-            System.out.println("No user");
-            return null;
-        }
+//        else {
+//            System.out.println("No user");
+//            return null;
+//        }
         System.out.println(user);
         if(user.getIsvalid() == true){
             user.setIsvalid(false);
@@ -121,7 +121,7 @@ public class UserService {
         }
         else{
             System.out.println("No user");
-            return null;
+            return new User();
         }
 //        user2.setUserId(user.getUserId());
 //        user2.setUserName(user.getUserName());
