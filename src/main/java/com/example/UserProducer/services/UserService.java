@@ -135,4 +135,20 @@ public class UserService {
         System.out.println("Data Updated!!");
         return user2;
     }
+
+    public User forgotPassword(String userId,String password){
+        Optional<User> user = userRepository.findById(userId);
+        User user1 = new User();
+        if(user.isPresent()){
+            user1=user.get();
+        }
+        else{
+            System.out.println("No User");
+            return new User();
+        }
+        user1.setPassword(password);
+        System.out.println("Updated Password!!");
+        userRepository.save(user1);
+        return user1;
+    }
 }
