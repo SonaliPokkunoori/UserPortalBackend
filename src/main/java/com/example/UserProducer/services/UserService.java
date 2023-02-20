@@ -42,7 +42,7 @@ public class UserService {
         return user;
     }
 
-//    @Cacheable(value = "userCache")
+    //    @Cacheable(value = "userCache")
     public User getUserDetails(String userId) {
         Optional<User> user = userRepository.findById(userId);
         User user1 = new User();
@@ -133,13 +133,12 @@ public class UserService {
         return user2;
     }
 
-    public User forgotPassword(String userId,String password){
+    public User forgotPassword(String userId, String password) {
         Optional<User> user = userRepository.findById(userId);
         User user1 = new User();
-        if(user.isPresent()){
-            user1=user.get();
-        }
-        else{
+        if (user.isPresent()) {
+            user1 = user.get();
+        } else {
             System.out.println("No User");
             return new User();
         }

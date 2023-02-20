@@ -18,54 +18,54 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/addUserDetails")
-    public ResponseEntity<User> addUserDetails(@RequestBody UserDTO userDTO){
-        User user=userService.addUserDetails(userDTO);
+    public ResponseEntity<User> addUserDetails(@RequestBody UserDTO userDTO) {
+        User user = userService.addUserDetails(userDTO);
         System.out.println("Hello~");
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 
     @GetMapping("/getUserDetails/{userId}")
-    public ResponseEntity<User> getUserDetails(@PathVariable("userId") String userId){
-        User user=userService.getUserDetails(userId);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+    public ResponseEntity<User> getUserDetails(@PathVariable("userId") String userId) {
+        User user = userService.getUserDetails(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getUserDetailsByName/{userName}")
-    public ResponseEntity<User> getUserDetailsByName(@PathVariable("userName") String userName){
-        User user=userService.getUserDetailsByName(userName);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+    public ResponseEntity<User> getUserDetailsByName(@PathVariable("userName") String userName) {
+        User user = userService.getUserDetailsByName(userName);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUser/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable("userId") String userId){
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") String userId) {
         userService.deleteUserById(userId);
-        return new ResponseEntity<>("Data deleted!",HttpStatus.OK);
+        return new ResponseEntity<>("Data deleted!", HttpStatus.OK);
     }
 
     @PostMapping("/getLoginStatus")
-    public ResponseEntity<StatusDTO> loginStatus(@RequestBody LoginDTO loginDTO){
-        StatusDTO loginStatus=userService.loginStatus(loginDTO);
-        return new ResponseEntity<>(loginStatus,HttpStatus.OK);
+    public ResponseEntity<StatusDTO> loginStatus(@RequestBody LoginDTO loginDTO) {
+        StatusDTO loginStatus = userService.loginStatus(loginDTO);
+        return new ResponseEntity<>(loginStatus, HttpStatus.OK);
     }
 
     @PostMapping("/getLogoutStatus/{userId}")
-    public ResponseEntity<Boolean> logoutStatus(@PathVariable("userId") String userId){
+    public ResponseEntity<Boolean> logoutStatus(@PathVariable("userId") String userId) {
         Boolean logoutStatus = userService.logoutStatus(userId);
-        return new ResponseEntity<>(logoutStatus,HttpStatus.OK);
+        return new ResponseEntity<>(logoutStatus, HttpStatus.OK);
     }
 
     @PostMapping("/editProfile")
-    public ResponseEntity<User> editProfile(@RequestBody User user){
+    public ResponseEntity<User> editProfile(@RequestBody User user) {
         User user1 = userService.editProfile(user);
         System.out.println("Hello Forgot Password!");
-        return new ResponseEntity<>(user1,HttpStatus.OK);
+        return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
     @PostMapping("/forgotPassword/{userId}/{password}")
-    public ResponseEntity<User> forgotPassword(@PathVariable("userId") String userId,@PathVariable("password") String password){
-        User user = userService.forgotPassword(userId,password);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+    public ResponseEntity<User> forgotPassword(@PathVariable("userId") String userId, @PathVariable("password") String password) {
+        User user = userService.forgotPassword(userId, password);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }
