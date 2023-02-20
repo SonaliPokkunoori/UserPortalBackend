@@ -58,14 +58,14 @@ public class UserController {
     @PostMapping("/editProfile")
     public ResponseEntity<User> editProfile(@RequestBody User user){
         User user1 = userService.editProfile(user);
-        System.out.println("Hello No Null Responses!!");
+        System.out.println("Hello Forgot Password!");
         return new ResponseEntity<>(user1,HttpStatus.OK);
     }
-
 
     @PostMapping("/forgotPassword/{userId}/{password}")
     public ResponseEntity<User> forgotPassword(@PathVariable("userId") String userId,@PathVariable("password") String password){
         User user = userService.forgotPassword(userId,password);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
+
 }
