@@ -26,7 +26,7 @@ public class UserService {
 
     @CachePut(value = "userCache")
     public User addUserDetails(Object userDTO) {
-        kafkaTemplate.send("userTopic", userDTO);
+        kafkaTemplate.send("userProducerTopic", userDTO);
         System.out.println("Data sent to kafka");
 
         User user = new User();
